@@ -1,0 +1,23 @@
+{
+    "name": "com.mmmaellon.real-fake-doors.editor",
+    "references": [
+        "VRC.SDK3",
+        "VRC.SDK3.Editor",
+        "VRC.SDKBase",
+        "VRC.SDKBase.Editor",
+        "UdonSharp.Editor",
+        "UdonSharp.Runtime",
+        "com.mmmaellon.real-fake-doors",
+        "UnityEditor.UI",
+        "VRC.Udon.Editor"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,21 @@
+{
+    "name": "com.mmmaellon.real-fake-doors",
+    "references": [
+        "VRC.SDK3",
+        "VRC.SDKBase",
+        "VRC.Udon",
+        "UdonSharp.Runtime",
+        "UdonSharp.Editor",
+        "Unity.TextMeshPro",
+        "com.mmmaellon.smartobjectsync"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -20,7 +20,7 @@ namespace MMMaellon
         {
             string sourceDir = "Assets/MMMaellon/ExampleScene/";
             // string tempDir = "Assets/MMMaellon/Temp/";
-            string exampleDir = "Packages/com.mmmaellon.juice/Samples~/Example/";
+            string exampleDir = "Packages/com.mmmaellon.real-fake-doors/Samples~/Example/";
             // Save the current scene
             EditorSceneManager.SaveScene(SceneManager.GetActiveScene());
 

@@ -1,7 +1,7 @@
 name: Build Repo Listing
 
 env:
-  CurrentPackageName: com.mmmaellon.lower-case-name
+  CurrentPackageName: com.mmmaellon.real-fake-doors
   listPublishDirectory: Website
   pathToCi: ci
   

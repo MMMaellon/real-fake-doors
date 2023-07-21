@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
   push:
     branches: main
-    paths: Packages/com.mmmaellon.lower-case-name/**
+    paths: Packages/com.mmmaellon.real-fake-doors/**
 
 env:
-  packageName: "com.mmmaellon.lower-case-name"
+  packageName: "com.mmmaellon.real-fake-doors"
 
 permissions:
   contents: write

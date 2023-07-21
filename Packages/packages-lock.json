@@ -1,7 +1,13 @@
 {
   "dependencies": {
-    "com.mmmaellon.lower-case-name": {
-      "version": "file:com.mmmaellon.lower-case-name",
+    "com.mmmaellon.real-fake-doors": {
+      "version": "file:com.mmmaellon.real-fake-doors",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "com.mmmaellon.smartobjectsync": {
+      "version": "file:com.mmmaellon.smartobjectsync",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
@@ -129,7 +135,14 @@
     },
     "com.unity.xr.oculus.standalone": {
       "version": "2.38.4",
-      "depth": 1,
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.xr.openvr.standalone": {
+      "version": "2.0.5",
+      "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
