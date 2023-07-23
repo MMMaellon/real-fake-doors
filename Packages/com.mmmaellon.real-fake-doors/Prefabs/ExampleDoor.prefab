@@ -890,7 +890,7 @@ MonoBehaviour:
   ThrowVelocityBoostScale: 1
   currentlyHeldBy: {fileID: 0}
   pickupable: 1
-  proximity: 2
+  proximity: 0
 --- !u!1 &3103653976365948525
 GameObject:
   m_ObjectHideFlags: 0

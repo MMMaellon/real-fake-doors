@@ -118,11 +118,12 @@ namespace MMMaellon.Door
             {
                 closedVector = CalcLocalVector(doorHandle.transform.position);
             }
-            if (Utilities.IsValid(doorBlockerCollider))
-            {
-                doorBlockerCollider.enabled = open;
-            }
-            sync.rigid.isKinematic = !open;
+            CheckOpen();
+            // if (Utilities.IsValid(doorBlockerCollider))
+            // {
+            //     doorBlockerCollider.enabled = open;
+            // }
+            // sync.rigid.isKinematic = !open;
         }
 
         public Vector3 CalcLocalVector(Vector3 pos)
@@ -178,14 +179,14 @@ namespace MMMaellon.Door
         }
 
         public void OpenFX(){
-            if (Utilities.IsValid(openSound))
+            if (Utilities.IsValid(openSound) && Time.timeSinceLevelLoad > 1f)
             {
                 openSound.Play();
             }
         }
 
         public void CloseFX(){
-            if (Utilities.IsValid(closeSound))
+            if (Utilities.IsValid(closeSound) && Time.timeSinceLevelLoad > 1f)
             {
                 closeSound.Play();
             }
