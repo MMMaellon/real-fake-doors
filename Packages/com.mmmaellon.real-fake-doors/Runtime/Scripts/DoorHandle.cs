@@ -29,16 +29,17 @@ namespace MMMaellon.Door
 
                 if (sync.IsHeld())
                 {
-                    door.sync.rigid.detectCollisions = false;
+                    // door.sync.rigid.detectCollisions = false;
                     transform.SetParent(null, true);
-                    if (sync.IsLocalOwner())
+                    if (sync.IsLocalOwner() && !door.IsActiveState())
                     {
                         door.EnterState();
                     }
+                    door.sync.StartInterpolation();
                 }
                 else
                 {
-                    door.sync.rigid.detectCollisions = true;
+                    // door.sync.rigid.detectCollisions = true;
                     transform.SetParent(startParent, true);
                     transform.localPosition = startPos;
                     transform.localRotation = startRot;
