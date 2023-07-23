@@ -15,7 +15,7 @@ namespace MMMaellon.Door
     public class DoorHandle : SmartObjectSyncListener
     {
         public SmartObjectSync handleSync;
-        public GrabbableDoor door;
+        public Door door;
         public override void OnChangeOwner(SmartObjectSync sync, VRCPlayerApi oldOwner, VRCPlayerApi newOwner)
         {
             
@@ -50,6 +50,22 @@ namespace MMMaellon.Door
                 }
             } else
             {
+                if (Utilities.IsValid(door.movementSound))
+                {
+                    if (newState != SmartObjectSync.STATE_SLEEPING)
+                    {
+                        if (!door.movementSound.isPlaying)
+                        {
+                            door.movementSound.Play();
+                        }
+                    } else
+                    {
+                        if (door.movementSound.isPlaying)
+                        {
+                            door.movementSound.Stop();
+                        }
+                    }
+                }
                 enabled = newState != SmartObjectSync.STATE_SLEEPING && !handleSync.IsHeld();
                 door.sync.rigid.detectCollisions = !enabled;
             }
@@ -71,24 +87,36 @@ namespace MMMaellon.Door
             startParent = transform.parent;
         }
 
-        float calcedAngle;
+        bool atLimit = false;
         public void Update()
         {
-            if (!handleSync.IsOwnerLocal())
-            {
-                return;
-            }
 
-            calcedAngle = door.CalcAngle(door.CalcLocalVector(transform.position));
-
-            if (calcedAngle == door.maxNegativeAngle || calcedAngle == door.maxPositiveAngle)
+            if (door.AtLimit() && door.open)
             {
                 door.sync.rigid.velocity = Vector3.zero;
                 door.sync.rigid.angularVelocity = Vector3.zero;
-                door.sync.Serialize();
+                if (handleSync.IsOwnerLocal())
+                {
+                    door.sync.Serialize();
+                }
+                if (!atLimit)
+                {
+                    door.HitMaxFX();
+                    atLimit = true;
+                }
+            } else
+            {
+                atLimit = false;
             }
 
-            door.CheckOpen();
+            if (handleSync.IsOwnerLocal())
+            {
+                door.CheckOpen();
+            }
+            if (Utilities.IsValid(door.movementSound))
+            {
+                door.movementSound.volume = Mathf.Lerp(door.movementSound.volume, Mathf.Clamp01(door.sync.rigid.velocity.magnitude / Mathf.Max(0.001f, door.maxMoveSoundSpeed)), 0.25f);
+            }
         }
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
