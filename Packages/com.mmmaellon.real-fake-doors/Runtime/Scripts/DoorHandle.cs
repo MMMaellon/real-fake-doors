@@ -69,7 +69,7 @@ namespace MMMaellon.Door
                     }
                 }
                 enabled = newState != SmartObjectSync.STATE_SLEEPING && !handleSync.IsHeld();
-                door.sync.rigid.detectCollisions = !enabled;
+                // door.sync.rigid.detectCollisions = !enabled;
             }
         }
         Vector3 startPos;
