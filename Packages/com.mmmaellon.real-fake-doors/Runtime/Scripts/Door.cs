@@ -64,7 +64,7 @@ namespace MMMaellon.Door
             }
         }
         public DoorHandle doorHandle;
-        public Transform closedDirectionOverride;
+        public Transform startingPositionOverride;
         [System.NonSerialized]
         public Vector3 startPos;
         [System.NonSerialized]
@@ -84,7 +84,11 @@ namespace MMMaellon.Door
 
         public override void OnEnterState()
         {
-            enabled = true;
+            if (!lateLoop)
+            {
+                lateLoop = true;
+                SendCustomEventDelayedFrames(nameof(LateLoop), 1);
+            }
             if (Utilities.IsValid(movementSound))
             {
                 movementSound.volume = 0f;
@@ -94,14 +98,15 @@ namespace MMMaellon.Door
 
         public override void OnExitState()
         {
-            sync.rigid.velocity = calcedVel;
-            sync.rigid.angularVelocity = calcedSpin;
-            enabled = false;
+            lateLoop = false;
+            if (!loop)
+            {
+                SendCustomEventDelayedFrames(nameof(CloseLoop), 1);
+            }
         }
 
         public override bool OnInterpolationEnd()
         {
-            // enabled = true;
             return true;
         }
 
@@ -123,18 +128,23 @@ namespace MMMaellon.Door
         Quaternion handleStartRot;
         void Start()
         {
-            enabled = false;
-            startPos = transform.localPosition;
-            startRot = transform.localRotation;
-            if (Utilities.IsValid(closedDirectionOverride))
+            sync.rigid.maxAngularVelocity = 100;
+            if (Utilities.IsValid(startingPositionOverride))
             {
-                closedVector = CalcLocalVector(closedDirectionOverride.position);
+                startPos = startingPositionOverride.localPosition;
+                startRot = startingPositionOverride.localRotation;
+                closedVector = CalcLocalVector(startingPositionOverride.transform.TransformPoint(transform.InverseTransformPoint(doorHandle.transform.position)));
             }
             else
             {
+                startPos = transform.localPosition;
+                startRot = transform.localRotation;
                 closedVector = CalcLocalVector(doorHandle.transform.position);
             }
-            CheckOpen();
+            if (sync.IsLocalOwner())
+            {
+                CheckOpen();
+            }
         }
 
         public abstract Vector3 CalcLocalVector(Vector3 pos);
@@ -231,8 +241,15 @@ namespace MMMaellon.Door
         public abstract void CheckOpen();
 
         bool atLimit = false;
-        public override void PostLateUpdate()
+        [System.NonSerialized]
+        public bool lateLoop = false;
+        public void LateLoop()
         {
+            if (!lateLoop)
+            {
+                return;
+            }
+            SendCustomEventDelayedFrames(nameof(LateLoop), 1, VRC.Udon.Common.Enums.EventTiming.LateUpdate);
             RecordTransforms();
             CalcTargetTransforms();
             currentPos = targetPos;
@@ -282,7 +299,7 @@ namespace MMMaellon.Door
         float interpolation;
         public void CloseLoop()
         {
-            if (enabled == true || startClose + sync.lagTime < Time.timeSinceLevelLoad)
+            if (lateLoop == true || startClose + sync.lagTime < Time.timeSinceLevelLoad)
             {
                 transform.localPosition = targetPos;
                 transform.localRotation = targetRot;
