@@ -18,7 +18,7 @@ namespace MMMaellon.Door
         public Door door;
         public override void OnChangeOwner(SmartObjectSync sync, VRCPlayerApi oldOwner, VRCPlayerApi newOwner)
         {
-            
+
         }
 
         public override void OnChangeState(SmartObjectSync sync, int oldState, int newState)
@@ -48,7 +48,8 @@ namespace MMMaellon.Door
                         door.ExitState();
                     }
                 }
-            } else
+            }
+            else
             {
                 if (Utilities.IsValid(door.movementSound))
                 {
@@ -58,7 +59,8 @@ namespace MMMaellon.Door
                         {
                             door.movementSound.Play();
                         }
-                    } else
+                    }
+                    else
                     {
                         if (door.movementSound.isPlaying)
                         {
@@ -104,7 +106,8 @@ namespace MMMaellon.Door
                     door.HitMaxFX();
                     atLimit = true;
                 }
-            } else
+            }
+            else
             {
                 atLimit = false;
             }

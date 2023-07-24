@@ -26,12 +26,20 @@ namespace MMMaellon.Door
                     sync.rigid.isKinematic = !value;
                     if (value)
                     {
+                        loop = false;
                         OpenFX();
                     }
                     else
                     {
-                        transform.localPosition = startPos;
-                        transform.localRotation = startRot;
+                        startClosePos = transform.localPosition;
+                        startCloseRot = transform.localRotation;
+                        targetPos = startPos;
+                        targetRot = startRot;
+                        startClose = Time.timeSinceLevelLoad;
+                        if (!loop)
+                        {
+                            SendCustomEventDelayedFrames(nameof(CloseLoop), 1);
+                        }
                         CloseFX();
                     }
                     if (sync.IsLocalOwner())
@@ -39,9 +47,16 @@ namespace MMMaellon.Door
                         RequestSerialization();
                     }
                     sync.StartInterpolation();
-                    if (!value)
+                    if (Utilities.IsValid(movementSound))
                     {
-                        movementSound.Stop();
+                        if (value)
+                        {
+                            movementSound.Play();
+                        }
+                        else
+                        {
+                            movementSound.Stop();
+                        }
                     }
                 }
                 _open = value;
@@ -61,6 +76,7 @@ namespace MMMaellon.Door
         public AudioSource hitMaxSound;
         public AudioSource movementSound;
         public float maxMoveSoundSpeed = 1f;
+        public DoorListener listener;
         public override void Interpolate(float interpolation)
         {
 
@@ -103,6 +119,8 @@ namespace MMMaellon.Door
 
         }
 
+        Vector3 handleStartPos;
+        Quaternion handleStartRot;
         void Start()
         {
             enabled = false;
@@ -140,6 +158,10 @@ namespace MMMaellon.Door
         }
         public Vector3 CalcVel()
         {
+            if (Utilities.IsValid(transform.parent))
+            {
+                return (transform.parent.TransformPoint(currentPos) - transform.parent.TransformPoint(lastPos)) / Time.deltaTime;
+            }
             return (currentPos - lastPos) / Time.deltaTime;
         }
 
@@ -149,7 +171,14 @@ namespace MMMaellon.Door
         public Vector3 axis;
         public Vector3 CalcSpin()
         {
-            (Quaternion.Normalize(Quaternion.Inverse(lastRot) * currentRot)).ToAngleAxis(out angle, out axis);
+            if (Utilities.IsValid(transform.parent))
+            {
+                (Quaternion.Normalize(Quaternion.Inverse(transform.parent.rotation * lastRot) * (transform.parent.rotation * currentRot))).ToAngleAxis(out angle, out axis);
+            }
+            else
+            {
+                (Quaternion.Normalize(Quaternion.Inverse(lastRot) * currentRot)).ToAngleAxis(out angle, out axis);
+            }
             //Make sure we are using the smallest angle of rotation. I.E. -90 degrees instead of 270 degrees wherever possible
             if (angle < -180)
             {
@@ -174,6 +203,10 @@ namespace MMMaellon.Door
             {
                 openSound.Play();
             }
+            if (Utilities.IsValid(listener))
+            {
+                listener.OnOpen();
+            }
         }
 
         public void CloseFX()
@@ -181,6 +214,10 @@ namespace MMMaellon.Door
             if (Utilities.IsValid(closeSound) && Time.timeSinceLevelLoad > 1f)
             {
                 closeSound.Play();
+            }
+            if (Utilities.IsValid(listener))
+            {
+                listener.OnClose();
             }
         }
         public void HitMaxFX()
@@ -218,8 +255,6 @@ namespace MMMaellon.Door
                 sync.rigid.velocity = calcedVel;
                 sync.rigid.angularVelocity = calcedSpin;
 
-
-
                 if (AtLimit() && open)
                 {
                     if (!atLimit)
@@ -239,10 +274,32 @@ namespace MMMaellon.Door
                 movementSound.volume = CalcMoveVolume();
             }
         }
-        public float CalcMoveVolume()
+
+        float startClose = -1001f;
+        bool loop = false;
+        Vector3 startClosePos;
+        Quaternion startCloseRot;
+        float interpolation;
+        public void CloseLoop()
         {
-            return Mathf.Lerp(movementSound.volume, Mathf.Clamp01(sync.rigid.velocity.magnitude / Mathf.Max(0.001f, maxMoveSoundSpeed)), 0.25f);
+            if (enabled == true || startClose + sync.lagTime < Time.timeSinceLevelLoad)
+            {
+                transform.localPosition = targetPos;
+                transform.localRotation = targetRot;
+                loop = false;
+                if (sync.IsLocalOwner())
+                {
+                    sync.Serialize();
+                }
+                return;
+            }
+            loop = true;
+            interpolation = (Time.timeSinceLevelLoad - startClose) / sync.lagTime;
+            transform.localPosition = sync.HermiteInterpolatePosition(startClosePos, Vector3.zero, targetPos, Vector3.zero, interpolation);
+            transform.localRotation = sync.HermiteInterpolateRotation(startCloseRot, Vector3.zero, targetRot, Vector3.zero, interpolation);
+            SendCustomEventDelayedFrames(nameof(CloseLoop), 1);
         }
+        public abstract float CalcMoveVolume();
         public abstract bool AtLimit();
     }
 }

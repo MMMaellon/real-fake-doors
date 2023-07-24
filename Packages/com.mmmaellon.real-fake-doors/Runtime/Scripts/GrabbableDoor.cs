@@ -11,7 +11,8 @@ namespace MMMaellon.Door
     {
         public Transform hinge;
         public Vector3 hingeAxis = new Vector3(0, 1, 0);
-        public float closedAngleThreshold = 5f;
+        public float closeAngleThreshold = 5f;
+        public float openAngleThreshold = 5f;
         public float maxNegativeAngle = 0f;
         public float maxPositiveAngle = 150f;
 
@@ -41,9 +42,13 @@ namespace MMMaellon.Door
             {
                 currentAngle = Mathf.Min(maxPositiveAngle, Mathf.Max(maxNegativeAngle, currentAngle));
             }
-            if (!open)
+            if (open)
             {
-                currentAngle = Mathf.Abs(currentAngle) > (closedAngleThreshold) ? currentAngle : 0f;
+                currentAngle = Mathf.Abs(currentAngle) > (closeAngleThreshold) ? currentAngle : 0f;
+            }
+            else
+            {
+                currentAngle = Mathf.Abs(currentAngle) > (openAngleThreshold) ? currentAngle : 0f;
             }
             return currentAngle;
         }
@@ -75,6 +80,11 @@ namespace MMMaellon.Door
         {
             calcedAngle = CalcAngle(CalcLocalVector(doorHandle.transform.position));
             return calcedAngle == maxNegativeAngle || calcedAngle == maxPositiveAngle;
+        }
+
+        public override float CalcMoveVolume()
+        {
+            return Mathf.Lerp(movementSound.volume, Mathf.Clamp01((sync.rigid.angularVelocity.magnitude) / Mathf.Max(0.001f, maxMoveSoundSpeed)), 0.25f);
         }
     }
 }
