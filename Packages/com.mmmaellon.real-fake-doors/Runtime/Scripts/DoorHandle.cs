@@ -112,7 +112,7 @@ namespace MMMaellon.Door
                 atLimit = false;
             }
 
-            if (handleSync.IsOwnerLocal())
+            if (handleSync.IsOwnerLocal() && !handleSync.IsHeld())
             {
                 door.CheckOpen();
             }

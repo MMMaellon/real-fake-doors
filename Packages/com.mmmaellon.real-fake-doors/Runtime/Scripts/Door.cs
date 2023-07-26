@@ -33,8 +33,6 @@ namespace MMMaellon.Door
                     {
                         startClosePos = transform.localPosition;
                         startCloseRot = transform.localRotation;
-                        targetPos = startPos;
-                        targetRot = startRot;
                         startClose = Time.timeSinceLevelLoad;
                         if (!loop)
                         {
@@ -99,7 +97,7 @@ namespace MMMaellon.Door
         public override void OnExitState()
         {
             lateLoop = false;
-            if (!loop)
+            if (!loop && !open)
             {
                 SendCustomEventDelayedFrames(nameof(CloseLoop), 1);
             }
@@ -312,8 +310,8 @@ namespace MMMaellon.Door
             }
             loop = true;
             interpolation = (Time.timeSinceLevelLoad - startClose) / sync.lagTime;
-            transform.localPosition = sync.HermiteInterpolatePosition(startClosePos, Vector3.zero, targetPos, Vector3.zero, interpolation);
-            transform.localRotation = sync.HermiteInterpolateRotation(startCloseRot, Vector3.zero, targetRot, Vector3.zero, interpolation);
+            transform.localPosition = sync.HermiteInterpolatePosition(startClosePos, Vector3.zero, startPos, Vector3.zero, interpolation);
+            transform.localRotation = sync.HermiteInterpolateRotation(startCloseRot, Vector3.zero, startRot, Vector3.zero, interpolation);
             SendCustomEventDelayedFrames(nameof(CloseLoop), 1);
         }
         public abstract float CalcMoveVolume();

@@ -84,6 +84,10 @@ namespace MMMaellon.Door
 
         public override float CalcMoveVolume()
         {
+            if (doorHandle.handleSync.IsHeld())
+            {
+                return Mathf.Lerp(movementSound.volume, Mathf.Clamp01((calcedSpin.magnitude) / Mathf.Max(0.001f, maxMoveSoundSpeed)), 0.25f);
+            }
             return Mathf.Lerp(movementSound.volume, Mathf.Clamp01((sync.rigid.angularVelocity.magnitude) / Mathf.Max(0.001f, maxMoveSoundSpeed)), 0.25f);
         }
     }
