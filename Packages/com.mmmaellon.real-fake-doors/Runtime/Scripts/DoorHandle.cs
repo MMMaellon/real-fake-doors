@@ -18,7 +18,10 @@ namespace MMMaellon.Door
         public Door door;
         public override void OnChangeOwner(SmartObjectSync sync, VRCPlayerApi oldOwner, VRCPlayerApi newOwner)
         {
-
+            if (sync == door.sync && sync.IsLocalOwner() && !handleSync.IsLocalOwner())
+            {
+                handleSync.TakeOwnership(true);
+            }
         }
 
         public override void OnChangeState(SmartObjectSync sync, int oldState, int newState)
