@@ -299,8 +299,8 @@ namespace MMMaellon.Door
         {
             if (lateLoop == true || startClose + sync.lagTime < Time.timeSinceLevelLoad)
             {
-                transform.localPosition = targetPos;
-                transform.localRotation = targetRot;
+                transform.localPosition = startPos;
+                transform.localRotation = startRot;
                 loop = false;
                 if (sync.IsLocalOwner())
                 {
