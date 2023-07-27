@@ -22,6 +22,17 @@ namespace MMMaellon.Door
             {
                 door.sync.TakeOwnership(true);
             }
+            else if (sync == door.sync)
+            {
+                if (sync.IsLocalOwner() && !handleSync.IsLocalOwner())
+                {
+                    handleSync.TakeOwnership(true);
+                }
+                else if (!sync.IsLocalOwner() && handleSync.IsLocalOwner() && handleSync.IsHeld())
+                {
+                    door.sync.TakeOwnership(true);
+                }
+            }
         }
 
         public override void OnChangeState(SmartObjectSync sync, int oldState, int newState)
