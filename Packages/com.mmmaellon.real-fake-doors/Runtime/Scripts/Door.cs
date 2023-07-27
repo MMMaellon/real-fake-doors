@@ -101,6 +101,11 @@ namespace MMMaellon.Door
             {
                 SendCustomEventDelayedFrames(nameof(CloseLoop), 1);
             }
+            if (sync.IsLocalOwner())
+            {
+                sync.rigid.velocity = calcedVel;
+                sync.rigid.angularVelocity = calcedSpin;
+            }
         }
 
         public override bool OnInterpolationEnd()
