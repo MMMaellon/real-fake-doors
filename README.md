@@ -2,7 +2,8 @@
 
 # Install
 
-[Download with VCC here](https://mmmaellon.github.io/MMMaellonVCCListing/)
+# [Download with VCC here](https://mmmaellon.github.io/MMMaellonVCCListing/)
+
 Package requires SmartObjectSync which the above link will also add to VCC for you.
 
 # Overview
