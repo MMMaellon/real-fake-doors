@@ -9,7 +9,7 @@ namespace MMMaellon.Door
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual), RequireComponent(typeof(SmartObjectSync))]
     public abstract class Door : SmartObjectSyncState
     {
-        [UdonSynced]
+        [UdonSynced, FieldChangeCallback(nameof(open))]
         public bool _open = false;
         public Collider doorBlockerCollider;
         public bool open
