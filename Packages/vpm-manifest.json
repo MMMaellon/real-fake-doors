@@ -27,7 +27,7 @@
       }
     },
     "com.vrchat.base": {
-      "version": "3.2.1",
+      "version": "3.2.2",
       "dependencies": {}
     },
     "com.vrchat.core.vpm-resolver": {
@@ -35,13 +35,13 @@
       "dependencies": {}
     },
     "com.vrchat.worlds": {
-      "version": "3.2.1",
+      "version": "3.2.2",
       "dependencies": {
-        "com.vrchat.base": "^3.2.1"
+        "com.vrchat.base": "3.2.2"
       }
     },
     "com.vrchat.udonsharp": {
-      "version": "1.1.8",
+      "version": "1.1.9",
       "dependencies": {
         "com.vrchat.worlds": "^3.1.x"
       }
@@ -53,7 +53,7 @@
       }
     },
     "com.mmmaellon.smartobjectsync": {
-      "version": "3.3.11",
+      "version": "3.4.1",
       "dependencies": {
         "com.vrchat.udonsharp": "1.1.X"
       }

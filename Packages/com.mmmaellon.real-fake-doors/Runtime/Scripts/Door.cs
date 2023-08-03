@@ -17,12 +17,13 @@ namespace MMMaellon.Door
             get => _open;
             set
             {
+                if (!value)
+                {
+                    startClosePos = transform.localPosition;
+                    startCloseRot = transform.localRotation;
+                }
                 if (_open != value)
                 {
-                    if (Utilities.IsValid(doorBlockerCollider))
-                    {
-                        doorBlockerCollider.enabled = !value;
-                    }
                     sync.rigid.isKinematic = !value;
                     if (value)
                     {
@@ -31,8 +32,6 @@ namespace MMMaellon.Door
                     }
                     else
                     {
-                        startClosePos = transform.localPosition;
-                        startCloseRot = transform.localRotation;
                         startClose = Time.timeSinceLevelLoad;
                         if (!loop)
                         {
@@ -56,6 +55,10 @@ namespace MMMaellon.Door
                             movementSound.Stop();
                         }
                     }
+                }
+                if (Utilities.IsValid(doorBlockerCollider))
+                {
+                    doorBlockerCollider.enabled = !value;
                 }
                 _open = value;
 
