@@ -12,6 +12,7 @@ namespace MMMaellon.Door
         [UdonSynced, FieldChangeCallback(nameof(open))]
         public bool _open = false;
         public Collider doorBlockerCollider;
+        public OcclusionPortal occlusionPortal;
         public bool open
         {
             get => _open;
@@ -59,6 +60,10 @@ namespace MMMaellon.Door
                 if (Utilities.IsValid(doorBlockerCollider))
                 {
                     doorBlockerCollider.enabled = !value;
+                }
+                if (Utilities.IsValid(occlusionPortal))
+                {
+                    occlusionPortal.open = value;
                 }
                 _open = value;
 
