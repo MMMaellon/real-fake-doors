@@ -44,6 +44,7 @@ namespace MMMaellon.Door
                 {
                     // door.sync.rigid.detectCollisions = true;
                     transform.SetParent(startParent, true);
+                    transform.localScale = startScale;
                     transform.localPosition = startPos;
                     transform.localRotation = startRot;
                     if (sync.IsLocalOwner())
@@ -78,6 +79,7 @@ namespace MMMaellon.Door
         Vector3 startPos;
         Quaternion startRot;
         Transform startParent;
+        Vector3 startScale;
         void Start()
         {
             if (!Utilities.IsValid(door))
@@ -90,6 +92,7 @@ namespace MMMaellon.Door
             startPos = transform.localPosition;
             startRot = transform.localRotation;
             startParent = transform.parent;
+            startScale = transform.localScale;
         }
 
         bool atLimit = false;
