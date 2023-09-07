@@ -151,17 +151,17 @@ PrefabInstance:
     - target: {fileID: 3103653974734570044, guid: 04b7148985687a248ac7991744bd4e8d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.422
+      value: -2.425
       objectReference: {fileID: 0}
     - target: {fileID: 3103653974734570044, guid: 04b7148985687a248ac7991744bd4e8d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.59
+      value: 0.434
       objectReference: {fileID: 0}
     - target: {fileID: 3103653974734570044, guid: 04b7148985687a248ac7991744bd4e8d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.646
+      value: -2.641
       objectReference: {fileID: 0}
     - target: {fileID: 3103653974734570044, guid: 04b7148985687a248ac7991744bd4e8d,
         type: 3}
@@ -5858,6 +5858,12 @@ PrefabInstance:
       propertyPath: NetworkIDs.Array.data[26].gameObject
       value: 
       objectReference: {fileID: 795838721}
+    - target: {fileID: 8464459589408506562, guid: 8894fa7e4588a5c4fab98453e558847d,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 33a3d4e559b0fdc4887d663f1d4b93a9,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8894fa7e4588a5c4fab98453e558847d, type: 3}
 --- !u!1 &1757523374

@@ -18,14 +18,7 @@ namespace MMMaellon.Door
 
         public override Vector3 CalcLocalVector(Vector3 pos)
         {
-            if (Utilities.IsValid(transform.parent))
-            {
-                return Vector3.ProjectOnPlane(Quaternion.Inverse(transform.parent.rotation) * (pos - hinge.transform.position), hinge.rotation * hingeAxis);
-            }
-            else
-            {
-                return Vector3.ProjectOnPlane((pos - hinge.transform.position), hinge.rotation * hingeAxis);
-            }
+            return Vector3.ProjectOnPlane((pos - hinge.transform.position), hinge.rotation * hingeAxis);
         }
 
         float lastAngle;
@@ -72,7 +65,7 @@ namespace MMMaellon.Door
 
         public override void CheckOpen()
         {
-            open = !((lastAngle < 0 && currentAngle >= 0 || lastAngle > 0 && currentAngle <= 0) && Mathf.Abs(currentAngle) < 90) && currentAngle != 0;
+            open = !(((lastAngle < 0 && currentAngle >= 0) || (lastAngle > 0 && currentAngle <= 0)) && Mathf.Abs(currentAngle) < 90) && currentAngle != 0;
         }
 
         float calcedAngle;

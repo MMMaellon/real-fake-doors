@@ -103,12 +103,16 @@ namespace MMMaellon.Door
             {
                 door.sync.rigid.velocity = Vector3.zero;
                 door.sync.rigid.angularVelocity = Vector3.zero;
+                door.sync.rigid.Sleep();
                 if (handleSync.IsOwnerLocal())
                 {
                     door.sync.Serialize();
                 }
                 if (!atLimit)
                 {
+                    door.CalcTargetTransforms();
+                    door.transform.localPosition = door.targetPos;
+                    door.transform.localRotation = door.targetRot;
                     door.HitMaxFX();
                     atLimit = true;
                 }
