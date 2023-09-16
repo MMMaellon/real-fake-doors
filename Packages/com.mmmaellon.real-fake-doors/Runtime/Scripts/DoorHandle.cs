@@ -58,7 +58,7 @@ namespace MMMaellon.Door
             {
                 if (Utilities.IsValid(door.movementSound))
                 {
-                    if (newState != SmartObjectSync.STATE_SLEEPING)
+                    if (newState != SmartObjectSync.STATE_SLEEPING && newState != SmartObjectSync.STATE_TELEPORTING)
                     {
                         if (!door.movementSound.isPlaying)
                         {
