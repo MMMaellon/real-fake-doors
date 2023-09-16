@@ -72,7 +72,7 @@ namespace MMMaellon.Door
                         }
                     }
                 }
-                enabled = newState != SmartObjectSync.STATE_SLEEPING && !handleSync.IsHeld();
+                enabled = newState != SmartObjectSync.STATE_SLEEPING && newState != SmartObjectSync.STATE_TELEPORTING && !handleSync.IsHeld();
                 // door.sync.rigid.detectCollisions = !enabled;
             }
         }
@@ -88,7 +88,7 @@ namespace MMMaellon.Door
             }
             door.doorHandle = this;
             door.sync.AddListener(this);
-            enabled = door.sync.state != SmartObjectSync.STATE_SLEEPING && !handleSync.IsHeld();
+            enabled = door.sync.state != SmartObjectSync.STATE_SLEEPING && door.sync.state != SmartObjectSync.STATE_TELEPORTING && !handleSync.IsHeld();
             startPos = transform.localPosition;
             startRot = transform.localRotation;
             startParent = transform.parent;
