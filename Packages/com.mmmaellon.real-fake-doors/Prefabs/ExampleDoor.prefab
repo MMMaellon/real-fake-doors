@@ -172,7 +172,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 3103653976365948503}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: -0.5, y: 0, z: 0}
   m_UseSpring: 0
   m_Spring:
@@ -744,6 +744,7 @@ MonoBehaviour:
   syncParticleCollisions: 0
   respawnHeight: -100
   printDebugMessages: 0
+  performanceModeCollisions: 1
   worldSpaceTeleport: 0
   worldSpaceSleep: 1
   forceContinuousSpeculative: 1
@@ -962,6 +963,7 @@ MonoBehaviour:
   syncParticleCollisions: 0
   respawnHeight: -100
   printDebugMessages: 1
+  performanceModeCollisions: 1
   worldSpaceTeleport: 0
   worldSpaceSleep: 1
   forceContinuousSpeculative: 1
@@ -1028,16 +1030,19 @@ MonoBehaviour:
   sync: {fileID: 3103653976365948502}
   _open: 0
   doorBlockerCollider: {fileID: 7506763952110053485}
+  occlusionPortal: {fileID: 0}
   doorHandle: {fileID: 3103653976359576827}
-  closedDirectionOverride: {fileID: 0}
+  startingPositionOverride: {fileID: 0}
   openSound: {fileID: 3103653975438831527}
   closeSound: {fileID: 3103653975467817374}
   hitMaxSound: {fileID: 2831345333899676888}
   movementSound: {fileID: 4525915236646853496}
   maxMoveSoundSpeed: 1
+  listener: {fileID: 0}
   hinge: {fileID: 3103653975235383293}
   hingeAxis: {x: 0, y: 1, z: 0}
-  closedAngleThreshold: 5
+  closeAngleThreshold: 5
+  openAngleThreshold: 5
   maxNegativeAngle: 0
   maxPositiveAngle: 150
 --- !u!114 &3103653976365948498

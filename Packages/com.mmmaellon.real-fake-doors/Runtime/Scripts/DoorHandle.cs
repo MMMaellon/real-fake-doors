@@ -104,7 +104,7 @@ namespace MMMaellon.Door
             {
                 door.sync.rigid.velocity = Vector3.zero;
                 door.sync.rigid.angularVelocity = Vector3.zero;
-                door.sync.rigid.Sleep();
+                // door.sync.rigid.Sleep();
                 if (handleSync.IsOwnerLocal())
                 {
                     door.sync.Serialize();
