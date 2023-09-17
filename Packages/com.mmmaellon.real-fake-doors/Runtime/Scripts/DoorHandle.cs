@@ -32,7 +32,7 @@ namespace MMMaellon.Door
 
                 if (sync.IsHeld())
                 {
-                    door.sync.TakeOwnership(false);
+                    // door.sync.TakeOwnership(false);
                     // door.sync.rigid.detectCollisions = false;
                     transform.SetParent(null, true);
                     if (sync.IsLocalOwner() && !door.IsActiveState())
