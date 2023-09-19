@@ -1,7 +1,7 @@
 {
     "name": "com.mmmaellon.real-fake-doors",
     "displayName": "Real Fake Doors",
-    "version": "1.4.6",
+    "version": "1.5.0",
     "description": "",
     "url": "https://github.com/MMMaellon/real-fake-doors.git",
     "dependencies": {},
@@ -12,7 +12,7 @@
         "url": "https://twitter.com/MMMaellon"
     },
     "vpmDependencies": {
-        "com.vrchat.udonsharp": "1.1.X",
+        "com.vrchat.worlds": "^3.2.0",
         "com.mmmaellon.smartobjectsync": ">3.0.0"
     },
     "samples": [
