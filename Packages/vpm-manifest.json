@@ -31,7 +31,7 @@
       "dependencies": {}
     },
     "com.vrchat.core.vpm-resolver": {
-      "version": "0.1.21",
+      "version": "0.1.23",
       "dependencies": {}
     },
     "com.vrchat.worlds": {
@@ -53,9 +53,9 @@
       }
     },
     "com.mmmaellon.smartobjectsync": {
-      "version": "3.6.4",
+      "version": "3.7.1",
       "dependencies": {
-        "com.vrchat.udonsharp": "1.1.X"
+        "com.vrchat.worlds": "^3.2.0"
       }
     }
   }

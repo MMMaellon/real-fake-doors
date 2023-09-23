@@ -44,10 +44,7 @@ namespace MMMaellon.Door
                 else
                 {
                     // door.sync.rigid.detectCollisions = true;
-                    transform.SetParent(startParent, true);
-                    transform.localScale = startScale;
-                    transform.localPosition = startPos;
-                    transform.localRotation = startRot;
+                    RevertTransforms();
                     if (sync.IsLocalOwner())
                     {
                         door.ExitState();
@@ -130,6 +127,23 @@ namespace MMMaellon.Door
             if (Utilities.IsValid(door.movementSound))
             {
                 door.movementSound.volume = Mathf.Lerp(door.movementSound.volume, Mathf.Clamp01(door.sync.rigid.velocity.magnitude / Mathf.Max(0.001f, door.maxMoveSoundSpeed)), 0.25f);
+            }
+        }
+
+        public void RevertTransforms()
+        {
+            transform.SetParent(startParent, true);
+            transform.localScale = startScale;
+            transform.localPosition = startPos;
+            transform.localRotation = startRot;
+        }
+
+        public override void OnDeserialization()
+        {
+            //prevent weird syncing issue with SmartObjectSync trying to sync world positions and stuff after the handle has been dropped
+            if (!handleSync.IsHeld())
+            {
+                RevertTransforms();
             }
         }
 

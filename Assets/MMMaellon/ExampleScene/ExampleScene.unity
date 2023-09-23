@@ -573,6 +573,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExampleDoor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3103653975235383266, guid: 04b7148985687a248ac7991744bd4e8d,
+        type: 3}
+      propertyPath: m_UseSpring
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103653975235383266, guid: 04b7148985687a248ac7991744bd4e8d,
+        type: 3}
+      propertyPath: m_Spring.spring
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3103653976359576825, guid: 04b7148985687a248ac7991744bd4e8d,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -588,12 +598,17 @@ PrefabInstance:
     - target: {fileID: 3103653976365948499, guid: 04b7148985687a248ac7991744bd4e8d,
         type: 3}
       propertyPath: maxNegativeAngle
-      value: -999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3103653976365948499, guid: 04b7148985687a248ac7991744bd4e8d,
         type: 3}
       propertyPath: maxPositiveAngle
-      value: 999
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103653976365948499, guid: 04b7148985687a248ac7991744bd4e8d,
+        type: 3}
+      propertyPath: closeAngleThreshold
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3103653976365948499, guid: 04b7148985687a248ac7991744bd4e8d,
         type: 3}

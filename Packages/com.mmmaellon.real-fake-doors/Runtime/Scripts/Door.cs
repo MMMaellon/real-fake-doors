@@ -270,7 +270,7 @@ namespace MMMaellon.Door
             if (doorHandle.handleSync.IsHeld())
             {
                 CheckOpen();
-                if (sync.interpolation < 1)
+                if (sync.interpolation < 1 && !doorHandle.handleSync.IsLocalOwner())
                 {
                     transform.localPosition = sync.HermiteInterpolatePosition(sync.startPos, sync.startVel, targetPos, Vector3.zero, sync.interpolation);
                     transform.localRotation = sync.HermiteInterpolateRotation(sync.startRot, sync.spin, targetRot, Vector3.zero, sync.interpolation);
