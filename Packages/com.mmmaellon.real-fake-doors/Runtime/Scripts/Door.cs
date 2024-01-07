@@ -109,7 +109,7 @@ namespace MMMaellon.Door
             {
                 SendCustomEventDelayedFrames(nameof(CloseLoop), 1);
             }
-            if (sync.IsLocalOwner())
+            if (sync.IsLocalOwner() && !sync.rigid.isKinematic)
             {
                 sync.rigid.velocity = calcedVel;
                 sync.rigid.angularVelocity = calcedSpin;
@@ -280,8 +280,11 @@ namespace MMMaellon.Door
                     transform.localPosition = targetPos;
                     transform.localRotation = targetRot;
                 }
-                sync.rigid.velocity = calcedVel;
-                sync.rigid.angularVelocity = calcedSpin;
+                if (!sync.rigid.isKinematic)
+                {
+                    sync.rigid.velocity = calcedVel;
+                    sync.rigid.angularVelocity = calcedSpin;
+                }
 
                 if (AtLimit() && open)
                 {
