@@ -6,17 +6,11 @@
     "com.vrchat.core.vpm-resolver": {
       "version": "0.1.21"
     },
-    "com.vrchat.worlds": {
-      "version": "3.2.1"
-    },
-    "com.vrchat.udonsharp": {
-      "version": "1.1.8"
-    },
-    "com.vrchat.clientsim": {
-      "version": "1.2.6"
-    },
     "com.mmmaellon.smartobjectsync": {
       "version": "3.3.10"
+    },
+    "com.vrchat.worlds": {
+      "version": "3.5.0"
     }
   },
   "locked": {
@@ -26,37 +20,25 @@
         "com.vrchat.base": "^3.2.x"
       }
     },
-    "com.vrchat.base": {
-      "version": "3.3.0",
-      "dependencies": {}
-    },
     "com.vrchat.core.vpm-resolver": {
-      "version": "0.1.23",
+      "version": "0.1.27",
       "dependencies": {}
-    },
-    "com.vrchat.worlds": {
-      "version": "3.3.0",
-      "dependencies": {
-        "com.vrchat.base": "3.3.0"
-      }
-    },
-    "com.vrchat.udonsharp": {
-      "version": "1.1.9",
-      "dependencies": {
-        "com.vrchat.worlds": "^3.1.x"
-      }
-    },
-    "com.vrchat.clientsim": {
-      "version": "1.2.7",
-      "dependencies": {
-        "com.vrchat.worlds": "^3.2.2"
-      }
     },
     "com.mmmaellon.smartobjectsync": {
-      "version": "3.7.1",
+      "version": "3.10.6",
       "dependencies": {
-        "com.vrchat.worlds": "^3.2.0"
+        "com.vrchat.worlds": "^3.2.1"
       }
+    },
+    "com.vrchat.worlds": {
+      "version": "3.5.0",
+      "dependencies": {
+        "com.vrchat.base": "3.5.0"
+      }
+    },
+    "com.vrchat.base": {
+      "version": "3.5.0",
+      "dependencies": {}
     }
   }
 }

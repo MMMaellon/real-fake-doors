@@ -136,6 +136,9 @@ namespace MMMaellon.Door
             transform.localScale = startScale;
             transform.localPosition = startPos;
             transform.localRotation = startRot;
+            if (handleSync.IsLocalOwner()){
+                handleSync.RequestSerialization();
+            }
         }
 
         public override void OnDeserialization()
