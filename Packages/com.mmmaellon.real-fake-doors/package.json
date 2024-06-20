@@ -2,7 +2,7 @@
     "name": "com.mmmaellon.real-fake-doors",
     "displayName": "Real Fake Doors",
     "version": "1.5.3",
-    "description": "",
+    "description": "Uses SmartObjectSync to make easily synced open-by-grabbing doors for VRChat ",
     "url": "https://github.com/MMMaellon/real-fake-doors.git",
     "dependencies": {},
     "gitDependencies": {},
